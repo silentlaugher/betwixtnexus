@@ -1,0 +1,109 @@
+/*---------------------------Main HEADER WRAPPER START-------------------------------*/
+.header-wrapper{
+	width:100%;
+	background:white;
+	position: fixed;
+	top:0;
+	z-index: 10000;
+}
+.nav-container{
+	width:95%;
+	margin:0px auto;
+}
+
+.nav{
+	width:100%;
+	height:50px;
+}
+.nav ul li{
+	line-height: 50px;
+	float:left;
+	margin-right: 0px;
+	padding: 0px 10px;
+	cursor:pointer;
+	transition: all 200ms ease-in-out;
+}
+.nav ul li a{
+	color:#333;
+	text-decoration:none;
+}
+
+.nav ul li .fa-twitter{
+	margin-right: 4px;
+	color: #5ab2f5;
+	font-size: 22px;
+	position: relative;
+	top: 2px;
+}
+
+.nav-left{
+	width:50%;
+	float:left;
+}
+
+.nav-right{
+	width:50%;
+	float:right;
+}
+
+.nav-right ul {float:right;}
+
+/*---------------------------HEADER WRAPPER END-------------------------------*/
+
+.inner-wrapper{
+	width:100%;
+	margin-top: 55px;
+}
+
+.main-container{
+	width: 70%;
+	overflow: auto;
+	margin-top: 70px;
+}
+
+.content-left{
+	width: 50%;
+	float: left;
+	font-size: 20px;
+	color:#fff;
+}
+
+.content-right{
+	width:40%;
+	float: right;
+}
+/* register page */
+html{
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+}
+html, body {
+    margin-top: 12px;
+    padding-bottom: 0px;
+    background-color: #657786;
+}
+
+.flag{
+    padding: 80px 15px;
+    text-align: center;
+}
+
+.regContainer{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.regContainer .regColumn{
+    background-color: #AAB8C2;
+    flex-grow: 0;
+    width: 785px;
+    padding: 25px 35px;
+    max-height: 100%;
+}
+
+.regContainer .regColumn .regHeader h1{
+    text-align: center;
+}
