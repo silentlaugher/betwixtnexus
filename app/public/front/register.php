@@ -1,5 +1,38 @@
 <?php 
+    include_once __DIR__."../../../config/core/Database.php";
 
+    //process the form
+    if(isset($_POST['registerBtn'])){
+        // collect form data and store in variables
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $rePassword = $_POST['confirm_password'];
+        $gender = $_POST['gender'];
+        $month = $_POST['month'];
+        $day = $_POST['day'];
+        $year = $_POST['year'];
+        $birthday = "{$year}-{$month}-{$day}";
+        try{
+            // create SQL insert statement
+            $sqlInsert = "INSERT INTO users (first_name, last_name, username, email, password, gender, birthday, joined) VALUES (:first_name, :last_name, :username, :email, :password, :gender, :birthday, now())";
+
+            // use PDO prepared to sanitize data
+            $statement = $db->prepare($sqlInsert);
+
+            // add the data into the database
+            $statement->execute(array(':first_name' => $first_name,':last_name' => $last_name,':username' => $username, ':email' => $email, ':password' => $password, ':gender' => $gender, ':birthday' => $birthday));
+
+            //check if one new row was created
+            if($statement->rowCount() == 1){
+                $result = "<p style='padding:20px; color:green;'> Registration Successful</p>";
+            }
+        }catch(PDOException $ex){
+            $result = "<p style='padding:20px; color:red;'> An error occurred: ".$ex->getMessage()."</p>";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,9 +84,9 @@
         <div class="regColumn">
             <div class="regHeader">
             <!--site logo goes here -->
-            <h1>Registration Form</h1>      
+            <h1>Registration Form</h1>
+            <?php if(isset($result)) echo $result;?>      
             </div>
-            <?php var_dump($_POST);?>
             <div class="regForm">
                 <form action="" method="POST">
                 <table>
