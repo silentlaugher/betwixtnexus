@@ -3,7 +3,7 @@
 
     //process the form
     if(isset($_POST['registerBtn'])){
-        // collect form data and store in variables
+        //collect form data and store in variables
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $username = $_POST['username'];
@@ -15,15 +15,20 @@
         $day = $_POST['day'];
         $year = $_POST['year'];
         $birthday = "{$year}-{$month}-{$day}";
+
+                
+        //encrypt the password
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
         try{
-            // create SQL insert statement
+            //create SQL insert statement
             $sqlInsert = "INSERT INTO users (first_name, last_name, username, email, password, gender, birthday, joined) VALUES (:first_name, :last_name, :username, :email, :password, :gender, :birthday, now())";
 
-            // use PDO prepared to sanitize data
+            //use PDO prepared to sanitize data
             $statement = $db->prepare($sqlInsert);
 
-            // add the data into the database
-            $statement->execute(array(':first_name' => $first_name,':last_name' => $last_name,':username' => $username, ':email' => $email, ':password' => $password, ':gender' => $gender, ':birthday' => $birthday));
+            //add the data into the database
+            $statement->execute(array(':first_name' => $first_name,':last_name' => $last_name,':username' => $username, ':email' => $email, ':password' => $hashed_password, ':gender' => $gender, ':birthday' => $birthday));
 
             //check if one new row was created
             if($statement->rowCount() == 1){
