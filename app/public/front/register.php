@@ -10,6 +10,7 @@
     <title>Betwixt Nexus Registration Page </title>
     <link rel="stylesheet" href="../../resources/assets/css/reset.css">
     <link rel="stylesheet" href="../../resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../resources/assets/css/policies.css">
     <link rel="stylesheet" href="../../resources/assets/css/app.css">
     <link rel="stylesheet" href="../../resources/assets/css/register.css">
 </head>
@@ -24,31 +25,37 @@
                 
                 <div class="nav-left">
                     <ul>
-                        <li><i class="fa fa-twitter" aria-hidden="true"></i><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
+                        <li><h2>Betwixt Nexus</h2></li>
                     </ul>
                 </div><!-- nav left ends-->
 
                 <div class="nav-right">
                     <ul>
                         <li><a href="#">Language</a></li>
-                        <li>{first_name, last_name} <a href="front/logout.php">Log out</a></li>
+
                     </ul>
                 </div><!-- nav right ends-->
 
             </div><!-- nav ends -->
 
         </div><!-- nav container ends -->
-
     </div><!-- header wrapper end -->
+    <div class="policy-container">
+        <p>By using this site you agree to our <a href="../front/policies/terms.php">Terms and Conditions</a>. Please accept these before continuing to the site.
+        We use cookies in this website to give you the best possible experience on our site and show you relevant ads. To find out more, read our <a href="../front/policies/cookies.php">Cookie Policy</a>, <a href="../front/policies/privacy.php">Privacy Policy</a>, and <a href="../front/policies/terms.php">Terms and Conditions</a></p>
+        <button class="policy-btn">
+            Okay
+        </button>
+    </div>
     <div class="regContainer">
         <div class="regColumn">
             <div class="regHeader">
             <!--site logo goes here -->
             <h1>Registration Form</h1>      
             </div>
+            <?php var_dump($_POST);?>
             <div class="regForm">
-                <form action="register.php" method="POST">
+                <form action="" method="POST">
                 <table>
                         <div class="name" style="float: left;">
                         <label for="firstNameField" class="form-label">First Name</label>
@@ -265,5 +272,7 @@
 	<script src="../../resources/assets/js/jquery-3.5.1.min.js"></script>
 	<!-- Include all compiled plugins or include individual files as needed -->
 	<script src="../../resources/assets/js/bootstrap.min.js"></script>
+    <!-- policies -->
+    <script src="../../resources/assets/js/policies.js"></script>
 </body>
 </html>
