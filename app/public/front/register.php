@@ -1,9 +1,17 @@
-<?php 
+<?php
+    //add db connection script
     include_once __DIR__."../../../config/core/Database.php";
+    include_once __DIR__."../../../config/core/utilities.php";
 
-    //process the form
-    if(isset($_POST['registerBtn'])){
-        //collect form data and store in variables
+    // process the form
+    if(isset($_POST['registerBtn'])) {
+        // initialize an array to store any error message from the form
+        $form_errors = array();
+    
+        // form validation
+        $required_fields = array('first_name', 'last_name', 'username', 'email', 'password', 'confirm_password', 'gender', 'month', 'day', 'year');
+    
+        // collect form data and store in variables
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $username = $_POST['username'];
@@ -16,27 +24,61 @@
         $year = $_POST['year'];
         $birthday = "{$year}-{$month}-{$day}";
 
-                
-        //encrypt the password
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-        try{
-            //create SQL insert statement
-            $sqlInsert = "INSERT INTO users (first_name, last_name, username, email, password, gender, birthday, joined) VALUES (:first_name, :last_name, :username, :email, :password, :gender, :birthday, now())";
-
-            //use PDO prepared to sanitize data
-            $statement = $db->prepare($sqlInsert);
-
-            //add the data into the database
-            $statement->execute(array(':first_name' => $first_name,':last_name' => $last_name,':username' => $username, ':email' => $email, ':password' => $hashed_password, ':gender' => $gender, ':birthday' => $birthday));
-
-            //check if one new row was created
-            if($statement->rowCount() == 1){
-                $result = "<p style='padding:20px; color:green;'> Registration Successful</p>";
+        //loop through the required fields array
+        foreach($required_fields as $name_of_field){
+            if(!isset($_POST[$name_of_field]) || $_POST[$name_of_field] == NULL){
+                $form_errors[] = $name_of_field . " is a required field";
             }
-        }catch(PDOException $ex){
-            $result = "<p style='padding:20px; color:red;'> An error occurred: ".$ex->getMessage()."</p>";
         }
+    
+        //check if error array is empty, if yes process the form data and insert record
+        if(empty($form_errors)){
+    
+            // encrypt the password
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    
+            try{
+                // create SQL insert statement
+                $sqlInsert = "INSERT INTO users (first_name, last_name, username, email, password, gender, birthday, joined)
+                          VALUES (:first_name, :last_name, :username, :email, :password, :gender, :birthday, now())";
+       
+                // use PDO prepared to sanitize data
+                $statement = $db->prepare($sqlInsert);
+       
+                // add the data into the database
+                $statement->execute(array(':first_name' => $first_name,':last_name' => $last_name,':username' => $username, ':email' => $email, ':password' => $hashed_password, ':gender' => $gender, ':birthday' => $birthday));
+       
+                //check if one new row was created
+                if($statement->rowCount() == 1){
+                    $result = "<p style='padding:20px; border: 1px solid gray; color:green;'>Registration Successful</p>";
+                }
+    
+            }catch (PDOException $ex){
+                $result = "<p style='padding:20px; border: 1px solid gray; color:red;'> An error occured: ".$ex->getMessage()."</p>";
+            }
+        }
+        else{
+            if(count($form_errors) == 1){
+                $result = "<p style='color:red;'>There was 1 error in the form<br>";
+                $result .= "<ul style='color:red;'>";
+
+                //loop through error array and display all items
+                foreach($form_errors as $error){
+                    $result .= "<li> {$error} </li>";
+                }
+                $result .= "</ul></p>";
+
+            }else{
+                $result = "<p style='color:red;'>There were " .count($form_errors). " errors in the form <br>";
+                $result .= "<ul style='color:red;'>";
+                //loop through error array and display all items
+                foreach($form_errors as $error){
+                    $result .= "<li> {$error} </li>";
+                }
+                $result .= "</ul></p>";
+            }
+        }
+    
     }
 ?>
 <!DOCTYPE html>
