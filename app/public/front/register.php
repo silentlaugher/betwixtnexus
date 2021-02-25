@@ -11,6 +11,27 @@
         // form validation
         $required_fields = array('first_name', 'last_name', 'username', 'email', 'password', 'confirm_password', 'gender', 'month', 'day', 'year');
     
+        //call the function to check empty field and merge the return data into form_error array
+        $form_errors = array_merge($form_errors, check_empty_fields($required_fields));
+    
+        //Fields that requires checking for minimum length
+        $fields_to_check_length = array('first_name' => 2, 'last_name' => 2, 'username' => 2, 'password' => 8, 'confirm_password' =>8);
+    
+        //Fields that requires checking for maximum length
+        $fields_to_check_max_length = array('first_name' =>15 , 'last_name' =>15 , 'username' => 20, 'password' => 25, 'confirm_password' => 25);
+    
+        //call the function to check minimum required length and merge the return data into form_error array
+        $form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
+    
+        //call the function to check maximum required length and merge the return data into form_error array
+        $form_errors = array_merge($form_errors, check_max_length($fields_to_check_max_length));
+     
+        //email validation / merge the return data into form_error array
+        $form_errors = array_merge($form_errors, check_email($_POST));
+    
+        //password validation / merge the return data into form_error array
+        $form_errors = array_merge($form_errors, check_passwords());
+    
         // collect form data and store in variables
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
@@ -23,17 +44,19 @@
         $day = $_POST['day'];
         $year = $_POST['year'];
         $birthday = "{$year}-{$month}-{$day}";
-
-        //loop through the required fields array
-        foreach($required_fields as $name_of_field){
-            if(!isset($_POST[$name_of_field]) || $_POST[$name_of_field] == NULL){
-                $form_errors[] = $name_of_field . " is a required field";
-            }
+    
+        if(checkDuplicates("users", "username", $username, $db)){
+            $result = flashMessage("That username is already taken. Please try a different one");
+        }
+    
+        else if(checkDuplicates("users", "email", $email, $db)){
+            $result = flashMessage("Error, that email has already been registered. Use a different one");
         }
     
         //check if error array is empty, if yes process the form data and insert record
-        if(empty($form_errors)){
+        else if(empty($form_errors)){
     
+            
             // encrypt the password
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     
@@ -52,30 +75,16 @@
                 if($statement->rowCount() == 1){
                     $result = "<p style='padding:20px; border: 1px solid gray; color:green;'>Registration Successful</p>";
                 }
-    
+
             }catch (PDOException $ex){
-                $result = "<p style='padding:20px; border: 1px solid gray; color:red;'> An error occured: ".$ex->getMessage()."</p>";
+                $result = flashMessage("An error occurred: " .$ex->getMessage());
             }
         }
         else{
             if(count($form_errors) == 1){
-                $result = "<p style='color:red;'>There was 1 error in the form<br>";
-                $result .= "<ul style='color:red;'>";
-
-                //loop through error array and display all items
-                foreach($form_errors as $error){
-                    $result .= "<li> {$error} </li>";
-                }
-                $result .= "</ul></p>";
-
+                $result = flashMessage("There was 1 error in the form<br>");
             }else{
-                $result = "<p style='color:red;'>There were " .count($form_errors). " errors in the form <br>";
-                $result .= "<ul style='color:red;'>";
-                //loop through error array and display all items
-                foreach($form_errors as $error){
-                    $result .= "<li> {$error} </li>";
-                }
-                $result .= "</ul></p>";
+                $result = flashMessage("There were " .count($form_errors). " errors in the form<br>");
             }
         }
     
@@ -132,7 +141,10 @@
             <div class="regHeader">
             <!--site logo goes here -->
             <h1>Registration Form</h1>
-            <?php if(isset($result)) echo $result;?>      
+            <?php
+                 if(isset($result)) echo $result;
+                 if(!empty($form_errors)) echo show_errors($form_errors);
+            ?>  
             </div>
             <div class="regForm">
                 <form action="" method="POST">
@@ -151,7 +163,7 @@
                         <br>
                         <div>
                         <label for="emailNameField" class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="Email" value="">
+                            <input type="text" name="email" class="form-control" placeholder="Email" value="">
                         </div>
                         <br>        
                         <div>
