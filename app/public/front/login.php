@@ -79,7 +79,7 @@
                 </li>
                 <br>
                 <li>
-                <p class="forgotPassword">Forgot username or password?<a href="forgot_password.php" style="background-color:#bd162c; color:white; border-radius:5px;">Reset</a></p>
+                <p class="forgotPassword">Forgot username or password?<a href="../../app/public/front/forgot_password.php" style="background-color:#bd162c; color:white; border-radius:5px;">Reset</a></p>
                 </li>
             </ul>
         </form>

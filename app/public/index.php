@@ -30,19 +30,12 @@
                 <div class="nav-left">
                     <ul>
                         <li><h2>Betwixt Nexus</h2></li>
-                        <li><i class="fas fa-tty" aria-hidden="true"></i><a href="#">Communicate</a></li>
-                        <li><i class="fa fa-play"></i><a href="#">Video</a></li>
-                        <li><i class="far fa-newspaper"></i><a href="#">Blog</a></li>
-                        <li><i class="fa fa-music"></i><a href="#">Music</a></li>
-                        <li><i class="fas fa-user-cog"></i><a href="#">Admin</a></li>
-                        <li><a href="#">About</a></li>
                     </ul>
                 </div><!-- nav left ends-->
 
                 <div class="nav-right">
                     <ul>
                         <li><a href="#">Language</a></li>
-                        <li>{screenName} <a href="front/logout.php">Log out</a></li>
                     </ul>
                 </div><!-- nav right ends-->
 
