@@ -30,7 +30,7 @@
                 <div class="nav-left">
                     <ul>
                         <li><h2>Betwixt Nexus</h2></li>
-                        <li><i class="fa fa-comments" aria-hidden="true"></i><a href="#">Communicate</a></li>
+                        <li><i class="fas fa-tty" aria-hidden="true"></i><a href="#">Communicate</a></li>
                         <li><i class="fa fa-play"></i><a href="#">Video</a></li>
                         <li><i class="far fa-newspaper"></i><a href="#">Blog</a></li>
                         <li><i class="fa fa-music"></i><a href="#">Music</a></li>

@@ -3,12 +3,12 @@
     include_once __DIR__."../../../config/core/Database.php";
     include_once __DIR__."../../../config/core/utilities.php";
 
-    // process the form
+    //process the form
     if(isset($_POST['registerBtn'])) {
-        // initialize an array to store any error message from the form
+        //initialize an array to store any error message from the form
         $form_errors = array();
     
-        // form validation
+        //form validation
         $required_fields = array('first_name', 'last_name', 'username', 'email', 'password', 'confirm_password', 'gender', 'month', 'day', 'year');
     
         //call the function to check empty field and merge the return data into form_error array
@@ -32,7 +32,7 @@
         //password validation / merge the return data into form_error array
         $form_errors = array_merge($form_errors, check_passwords());
     
-        // collect form data and store in variables
+        //collect form data and store in variables
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $username = $_POST['username'];
@@ -57,18 +57,18 @@
         else if(empty($form_errors)){
     
             
-            // encrypt the password
+            //encrypt the password
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     
             try{
-                // create SQL insert statement
+                //create SQL insert statement
                 $sqlInsert = "INSERT INTO users (first_name, last_name, username, email, password, gender, birthday, joined)
                           VALUES (:first_name, :last_name, :username, :email, :password, :gender, :birthday, now())";
        
-                // use PDO prepared to sanitize data
+                //use PDO prepared to sanitize data
                 $statement = $db->prepare($sqlInsert);
        
-                // add the data into the database
+                //add the data into the database
                 $statement->execute(array(':first_name' => $first_name,':last_name' => $last_name,':username' => $username, ':email' => $email, ':password' => $hashed_password, ':gender' => $gender, ':birthday' => $birthday));
        
                 //check if one new row was created
