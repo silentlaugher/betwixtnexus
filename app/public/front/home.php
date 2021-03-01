@@ -1,63 +1,83 @@
-<?php
+<?php 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Homepage</title>
-    <link rel="stylesheet" href="../../resources/assets/css/all.min.css"/>
+    <title>Betwixt Nexus Homepage Template</title>
     <link rel="stylesheet" href="../../resources/assets/css/reset.css"/>
+    <link rel="stylesheet" href="../../resources/assets/css/all.min.css"/>
     <link rel="stylesheet" href="../../resources/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../resources/assets/css/app.css">
+    <link rel="stylesheet" href="../../resources/assets/css/burger.css">
 </head>
 <body>
-    <div class="wrapper">
-    <!-- header wrapper -->
-    <div class="header-wrapper">
-        
-        <div class="nav-container">
-            <!-- Nav -->
-            <div class="nav">
-                
-                <div class="nav-left">
-                    <ul>
-                        <li><h2>Betwixt Nexus</h2></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-filter-square"></i>
-                            Menu
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><i class="fas fa-tty" aria-hidden="true"></i><a class="dropdown-item" href="#">Communicate</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                        </li>
-                        <li><i class="fas fa-tty" aria-hidden="true"></i><a href="#">Communicate</a></li>
-                        <li><i class="fa fa-play"></i><a href="#">Video</a></li>
-                        <li><i class="far fa-newspaper"></i><a href="#">Blog</a></li>
-                        <li><i class="fa fa-music"></i><a href="#">Music</a></li>
-                        <li><i class="fas fa-user-cog"></i><a href="#">Admin</a></li>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                </div><!-- nav left ends-->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Betwixt Nexus</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="main-header">
+    <canvas class="nav-canvas"></canvas>
+        <button class="menu-js menu">
+        <span class="menu-line-1 menu-line"></span>
+        <span class="menu-line-2 menu-line"></span>
+        <span class="menu-line-3 menu-line"></span>
+        </button>
 
-                <div class="nav-right">
-                    <ul>
-                        <li><a href="#">Language</a></li>
-                        <li>{screenName} <a href="logout.php">Log out</a></li>
-                    </ul>
-                </div><!-- nav right ends-->
+    <div class="nav-overlay nav-js">
+    <div class="nav-content">
+        <div class="nav-js-header nav-header">
+        <div class="nav-header-line nav-js-header-line"></div>
+        </div>
 
-            </div><!-- nav ends -->
+        <ul class="nav-links">
+            <br>
+            <li class="nav-link nav-js-animate"><i class="fas fa-home"></i>&ensp;<a href="../front/home.php" class="burger-link">Home</a></li>
+            <li class="nav-link nav-js-animate"><i class="far fa-compass"></i>&ensp;<a href="#">About</a></li>
+            <li class="nav-link nav-js-animate"><i class="far fa-newspaper"></i>&ensp;<a href="#">News</a></li>
+            <li class="nav-link nav-js-animate"><i class="fas fa-address-card"></i>&ensp;<a href="#">Profile</a></li>
+            <li class="nav-link nav-js-animate"><i class="fas fa-tty"></i>&ensp;<a href="#">Parle</a></li>
+            <li class="nav-link nav-js-animate"><i class="fa fa-film"></i>&ensp;<a href="#">Video</a></li>
+            <li class="nav-link nav-js-animate"><i class="fas fa-file-signature"></i>&ensp;<a href="#">Blog</a></li>
+            <li class="nav-link nav-js-animate"><i class="fa fa-music"></i>&ensp;<a href="#">Music</a></li>
+        </ul>
 
-        </div><!-- nav container ends -->
+        <div class="nav-sublinks nav-js-animate">
+        <div class="nav-js-animate">
+            <ul>
+                <i class="fas fa-user-cog" style="padding-left:-55px;"></i><a class="nav-sublink" href="#" style="font-weight:800;">Admin</a><br>
+                <i class="fas fa-power-off"></i><a class="nav-sublink" href="logout.php" style="font-weight:800;">Log out</a>
+            </ul>
+            
+        </div>
+            
+        </div>
 
-    </div><!-- header wrapper end -->
+        </div>
+
     </div>
+
+    
+        </div>
+        <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 325px; margin-left: -145px;">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <div class="nav-right">
+      &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<small>Welcome </small>&nbsp;<img src="../../resources/assets/images/avatar-image.png" class="img rounded-circle" alt="sample image" height="20px;" width="20px;"> {screenName}&ensp;&emsp;<a href="#">Language</a>
+        </div>
+    </div>
+    </nav>
+
+    <script src="../../resources/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="../../resources/assets/js/bootstrap.min.js"></script>
+    <script src="../../resources/assets/js/burger.js"></script>
+    <script src="../../resources/assets/js/anime.min.js"></script>
 </body>
 </html>
