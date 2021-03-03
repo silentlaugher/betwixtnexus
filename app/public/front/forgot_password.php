@@ -1,6 +1,9 @@
-<?php 
+<?php
+    //title
+    $page_title = "Betwixt Nexus - Reset Password Page -";
     //add our database connection script
     include_once __DIR__."../../../config/core/Database.php";
+    //add utilities functions file
     include_once __DIR__."../../../config/core/utilities.php";
 
     //process the form if the reset password button is clicked
@@ -57,9 +60,31 @@
 
                         //execute the statement
                         $statement->execute(array(':password' => $hashed_password, ':email' => $email));
-                        $result = "<p style='padding:20px; border: 1px solid gray; color: green;'> Password Reset Successful</p>"
-                    }
 
+                        // call sweet alert
+                        echo $result = "<script type=\"text/javascript\">
+                        swal({ title: \"Updated $username!\", 
+                            text: \"Password reset successful.\", 
+                            type: 'success',  
+                            confirmButtonText: \"Ok\" }); 
+                        
+                            setTimeout(function(){
+                                window.location.href = 'index.php';
+                            }, 5000);
+                        
+                        </script>";
+
+                    }
+                    else{
+                        // call sweet alert
+                        echo $result = "<script type=\"text/javascript\">
+                        swal({ title: \"OOPS $username!\", 
+                            text: \"The email address provided
+                            does not exist in our database, please try again.\", 
+                            type: 'error',  
+                            confirmButtonText: \"Ok\" }); 
+                        </script>";
+                    }
                 }catch (PDOException $ex){
                     $result = "<p style='padding:20px; border: 1px solid gray; color: red;'> An error occurred: ".$ex->getMessage()."</p>";
                 }
@@ -67,9 +92,9 @@
         }
         else{
             if(count($form_errors) == 1){
-                $result = "<p style='color: red;'> There is 1 error in the form<br>";
+                $result = "<p style='color: red;'> There was 1 error in the form<br>";
             }else{
-                $result = "<p style='color: red;'> There are " .count($form_errors). " errors in the form <br>";
+                $result = "<p style='color: red;'> There were " .count($form_errors). " errors in the form <br>";
             }
         }
     }
@@ -81,36 +106,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Betwixt Nexus Forgot Password Page</title>
+    <title><?php if(isset($page_title)) echo $page_title;?></title>
+    <link rel="stylesheet" href="../../resources/assets/css/reset.css">
+    <link rel="stylesheet" href="../../resources/assets/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="forgotPwContainer">
-        <div class="flag">
-        
-        </div>
-        <div class="column">
-            <div class="header">
-                <!--site logo goes here -->
-                <h1>Forgot Password</h1>
-                <h4>Form</h4>
-                <span>Reset your password and continue to site</span>
-                <?php 
-                    if(isset($result)) echo $result;
-                    if(!empty($form_errors)) echo show_errors($form_errors); 
-                ?>       
+    <div class="container">
+        <section class="col col-lg-7">
+            <h2>Betwixt Nexus Password Reset Form</h2><hr>
+
+            <div>
+                <?php if(isset($result)) echo $result; ?>
+                <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
             </div>
-            <div class="forgotPwForm">
-                <form method="POST" action="forgot_password.php">
-                    <table>
-                        <tr><td>Email:</td> <td><input type="text" value="" name="email"></td></tr>
-                        <tr><td>New Password:</td> <td><input type="password" value="" name="new_password"></td></tr>
-                        <tr><td>Confirm Password:</td> <td><input type="password" value="" name="confirm_password"></td></tr>
-                        <tr><td></td><td><input style="float: right;" type="submit" name="pwResetBtn" class="btn btn-danger" value="Reset"></td></tr>
-                    </table>
-                </form>
-                <p><a href="../index.php">Back</a> </p>
-            </div>
-        </div>
+            <div class="clearfix"></div>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="emailField">Email</label>
+                    <input type="text" name="email" class="form-control" id="emailField" placeholder="Your Email Address">
+                </div>
+
+                <div class="form-group">
+                    <label for="tokenField">Token</label>
+                    <input type="text" name="reset_token" class="form-control" id="tokenField" placeholder="Reset Token">
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordField">New Password</label>
+                    <input type="password" name="new_password" class="form-control" id="passwordField" placeholder="New Password">
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordField">Confirm Password</label>
+                    <input type="password" name="confirm_password" class="form-control" id="passwordField" placeholder="Confirm Password">
+                </div>
+                <button type="submit" name="passwordResetBtn" class="btn btn-primary float-right">Reset Password</button>
+            </form>
+        </section>
+        <p><a href="index.php">Back</a> </p>
     </div>
 </body>
 </html>

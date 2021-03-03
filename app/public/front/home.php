@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Betwixt Nexus Homepage Template</title>
+    <title><?php if(isset($page_title)) echo $page_title;?></title>
     <link rel="stylesheet" href="../../resources/assets/css/reset.css"/>
     <link rel="stylesheet" href="../../resources/assets/css/all.min.css"/>
     <link rel="stylesheet" href="../../resources/assets/css/bootstrap.min.css">
