@@ -75,7 +75,6 @@
 /* register page */
 html{
     position: relative;
-    overflow: hidden;
     min-height: 100%;
 }
 html, body {
@@ -106,4 +105,40 @@ html, body {
 
 .regContainer .regColumn .regHeader h1{
     text-align: center;
+}
+
+.policy-container {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: #2f3640;
+    color: #f5f6fa;
+    padding: 0 32px;
+    box-shadow: 0 -2px 16px rgba(47, 54, 64, 0.39);
+    transition: 400ms;
+}
+
+.policy-container.active{
+    bottom: 0;
+}
+
+.policy-container p{
+    margin: 24px 0;
+    line-height: 2;
+}
+
+.policy-container a {
+    color: #0275d8;
+}
+
+.policy-btn {
+    background: #e84118;
+    border: 0;
+    color: #f5f6fa;
+    padding: 12px 49px;
+    font-size: 18px;
+    margin-top: 16px;
+    border-radius: 8px;
+    cursor: pointer;
 }
