@@ -30,7 +30,7 @@
                if(password_verify($password, $hashed_password)){
                    $_SESSION['user_id'] = $id;
                    $_SESSION['username'] = $username;
-                   header("location: ../public/front/home.php");
+                   redirectTo('../public/front/home');
 
                }else{
                    $result = flashMessage("Your credentials are incorrect. Invalid username or password");

@@ -1,5 +1,8 @@
-<?php 
-
+<?php
+    //title
+    $page_title = "Betwixt Nexus - Homepage -";
+    //session
+    include_once __DIR__."../../../config/core/session.php";
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +55,7 @@
         <div class="nav-js-animate">
             <ul>
                 <i class="fas fa-user-cog" style="padding-left:-55px;"></i><a class="nav-sublink" href="#" style="font-weight:800;">Admin</a><br>
-                <i class="fas fa-power-off"></i><a class="nav-sublink" href="logout.php" style="font-weight:800;">Log out</a>
+                <i class="fas fa-power-off"></i><a class="nav-sublink" href="../front/logout.php" style="font-weight:800;">Log out</a>
             </ul>
             
         </div>
@@ -66,11 +69,11 @@
     
         </div>
         <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 325px; margin-left: -145px;">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 325px; margin-left: -125px;">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
       </form>
       <div class="nav-right">
-      &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<small>Welcome </small>&nbsp;<img src="../../resources/assets/images/avatar-image.png" class="img rounded-circle" alt="sample image" height="20px;" width="20px;"> {screenName}&ensp;&emsp;<a href="#">Language</a>
+      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<small style="height:18px;">Welcome </small>&nbsp;<img src="../../resources/assets/images/avatar-image.png" class="img rounded-circle" alt="sample image" height="20px;" width="20px;" padding-top="-10px;"> {screenName}&ensp;&emsp;<a href="#">Language</a>
         </div>
     </div>
     </nav>

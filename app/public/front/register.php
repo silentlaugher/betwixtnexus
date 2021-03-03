@@ -1,6 +1,9 @@
 <?php
+    //title
+    $page_title = "Betwixt Nexus - Registration Page -";
     //add db connection script
     include_once __DIR__."../../../config/core/Database.php";
+    //add utilities functions file
     include_once __DIR__."../../../config/core/utilities.php";
 
     //process the form
@@ -73,7 +76,7 @@
        
                 //check if one new row was created
                 if($statement->rowCount() == 1){
-                    $result = "<p style='padding:20px; border: 1px solid gray; color:green;'>Registration Successful</p>";
+                    $result = flashMessage("Registration Successful", "Pass");
                 }
 
             }catch (PDOException $ex){
@@ -82,9 +85,9 @@
         }
         else{
             if(count($form_errors) == 1){
-                $result = flashMessage("There was 1 error in the form<br>");
+                $result = flashMessage("There is 1 error in the form<br>");
             }else{
-                $result = flashMessage("There were " .count($form_errors). " errors in the form<br>");
+                $result = flashMessage("There are " .count($form_errors). " errors in the form<br>");
             }
         }
     
